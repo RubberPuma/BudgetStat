@@ -15,8 +15,11 @@ bash:
 migrate:
 	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py migrate
 
-make_migrations:
-	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py make_migrations
+makemigrations:
+	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py makemigrations
+
+user_create:
+	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py createsuperuser --noinput --username test --email admin@email.com
 
 ## Code overhaul
 mypy:
