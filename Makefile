@@ -9,6 +9,9 @@ build:
 down:
 	docker-compose -f $(COMPOSE_FILE) down
 
+bash:
+	docker-compose -f $(COMPOSE_FILE) run --rm backend bash
+
 migrate:
 	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py migrate
 
