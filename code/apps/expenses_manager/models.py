@@ -18,5 +18,5 @@ class Expense(models.Model):
     description = models.CharField(max_length=200)
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    currency = models.CharField(max_length=3, choices=CURRENCY_TYPE)
+    currency = models.CharField(max_length=3, choices=CURRENCY_TYPE, default="EUR")
     date = models.DateField()
