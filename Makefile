@@ -19,7 +19,7 @@ makemigrations:
 	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py makemigrations
 
 user_create:
-	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py createsuperuser --noinput --username test --email admin@email.com
+	docker-compose -f $(COMPOSE_FILE) run --rm backend python manage.py createsuperuser --noinput --username admin
 
 ## Code overhaul
 mypy:
