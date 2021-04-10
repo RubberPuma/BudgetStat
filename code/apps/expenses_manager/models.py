@@ -31,4 +31,5 @@ class Expense(models.Model):
     def __str__(self):
         return self.amount + ' ' + self.currency + ' ' + self.category 
 
-
+class Limit(models.Model):
+    pass
