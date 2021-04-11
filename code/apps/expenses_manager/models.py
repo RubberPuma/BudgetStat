@@ -1,6 +1,6 @@
 from django.db import models
 from apps.authentication.models import User
-
+from datetime import datetime
 
 class Category(models.Model):
     category_name = models.CharField(max_length=50)
@@ -32,4 +32,15 @@ class Expense(models.Model):
         return self.amount + ' ' + self.currency + ' ' + self.category 
 
 class Limit(models.Model):
-    pass
+    PERIODS = [
+        ('D', 'Daily'),
+        ('W', 'Weekly'),
+        ('M', 'Monthly'),
+        ('Y', 'Yearly'),
+    ]
+    limit_value = models.DecimalField(max_digits=15, decimal_places=2)
+    current_spent = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    period = models.CharField(max_length=1, choices=PERIODS, default="W")
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)    
+    start_date = models.DateTimeField(blank=True, default=datetime.now)
+
