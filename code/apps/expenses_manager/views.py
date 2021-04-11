@@ -4,15 +4,20 @@ from django.urls import reverse_lazy, reverse
 from django.views import generic
 from apps.expenses_manager.models import Expense, Category, Limit
 
-# display statistics suppage 
+from django.contrib.auth.decorators import login_required
+
+# display statistics suppage
+@login_required(login_url='login') 
 def stats(request):
     return HttpResponse("Statistics subpage")
 
 # display limit management page
+@login_required(login_url='login') 
 def limits(request):
     return HttpResponse("Limits management page")
 
 # display limit create form
+@login_required(login_url='login') 
 def create_limit(request):
     return HttpResponse("Limit create form")
 
@@ -22,14 +27,17 @@ class DeleteLimit(generic.edit.DeleteView):
     model = Limit
 
 # display limit edit form
+@login_required(login_url='login') 
 def edit_limit(request, expense_id):
     return HttpResponse("Limit edit form")
 
 # display expenses history
+@login_required(login_url='login') 
 def expenses_history(request):
     return HttpResponse("Expenses history subpage")
 
 # display expense create form
+@login_required(login_url='login') 
 def create_expense(request):
     return HttpResponse("Expense create form")
 
@@ -39,10 +47,12 @@ class DeleteExpense(generic.edit.DeleteView):
     model = Expense
 
 # display expense edit form
+@login_required(login_url='login') 
 def edit_expense(request, expense_id):
     return HttpResponse("Expense edit form")
 
 # display category create form
+@login_required(login_url='login') 
 def create_category(request):
     return HttpResponse("Category create form")
 
@@ -52,5 +62,6 @@ class DeleteCategory(generic.edit.DeleteView):
     model = Category
 
 # display category update form
+@login_required(login_url='login') 
 def update_category(request, category_id):
     return HttpResponse("Category update form")
