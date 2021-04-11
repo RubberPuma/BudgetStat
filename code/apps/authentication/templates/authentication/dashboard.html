@@ -1,0 +1,11 @@
+{% extends "authentication/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}      
+
+<div class="container py-5">
+  <p class="text-center">Hello, {{ user.username }}! <br><a href="{% url 'logout' %}">Logout</a>-></p>
+</div>
+
+{% endblock %}
