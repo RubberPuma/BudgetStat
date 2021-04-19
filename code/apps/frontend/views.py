@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.views import generic
-from apps.expenses_manager.models import Expense, Category, Limit
-
+from apps.api.models import Expense, Category, Limit
 from django.contrib.auth.decorators import login_required
 
 # display statistics suppage
