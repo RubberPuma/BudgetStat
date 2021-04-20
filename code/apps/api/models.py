@@ -29,7 +29,7 @@ class Expense(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return self.amount + ' ' + self.currency + ' ' + self.category 
+        return str(self.amount) + ' ' + self.currency + ' ' + str(self.category)
 
 class Limit(models.Model):
     PERIODS = [
@@ -43,4 +43,5 @@ class Limit(models.Model):
     period = models.CharField(max_length=1, choices=PERIODS, default="W")
     category = models.ForeignKey(Category, on_delete=models.PROTECT)    
     start_date = models.DateTimeField(blank=True, default=datetime.now)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
