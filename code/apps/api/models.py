@@ -45,3 +45,6 @@ class Limit(models.Model):
     start_date = models.DateTimeField(blank=True, default=datetime.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.category) + ' ' + str(self.limit_value)
+
