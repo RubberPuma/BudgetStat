@@ -1,21 +1,27 @@
 from rest_framework import viewsets
-from rest_framework.response import Response
 from rest_framework.decorators import action
-from .serializers import CategorySerializer, ExpenseSerializer, LimitSerializer, UserSerializer
+from rest_framework.response import Response
+
 from apps.api.models import Category, Expense, Limit
 from apps.authentication.models import User
+
+from .serializers import CategorySerializer, ExpenseSerializer, LimitSerializer, UserSerializer
+
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+
 class ExpenseViewSet(viewsets.ModelViewSet):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
 
+
 class LimitViewSet(viewsets.ModelViewSet):
     queryset = Limit.objects.all()
     serializer_class = LimitSerializer
+
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
