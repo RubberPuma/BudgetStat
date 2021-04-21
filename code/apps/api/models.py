@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 
 from apps.authentication.models import User
@@ -47,7 +45,7 @@ class Limit(models.Model):
     current_spent = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     period = models.CharField(max_length=1, choices=PERIODS, default="W")
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    start_date = models.DateTimeField(blank=True, default=datetime.now)
+    start_date = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
