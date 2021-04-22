@@ -24,3 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("dashboard/", include("apps.frontend.urls")),
 ]
+
+admin.site.site_header = "BudgetStat"

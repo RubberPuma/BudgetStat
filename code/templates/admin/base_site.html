@@ -1,0 +1,93 @@
+{% extends "admin/base_site.html" %}
+{% block extrahead %}
+    <style>
+        :root {
+        --primary: #242939;
+        --primary-light: #343b53;
+        --secondary: #3e4662;
+        --secondary-light: #5d6992;
+        --dark-font: #212529;
+        --background-light: #f8fafc;
+        }
+
+        /*--------GENERAL--------*/
+
+        body, #content-main .module{
+            background-color: var(--background-light);
+        }
+
+        a:link, a:visited {
+            color: var(--dark-font);
+        }
+        
+        /*--------HEADER--------*/
+
+        #header h1 a{
+            color:  white !important;
+            font-weight: 500;
+        }
+
+        #header{
+            color: white !important;
+            background-color: var(--primary);
+            padding: 20px 40px;
+        }
+
+        /*--------Breadcrumbs--------*/
+
+        div.breadcrumbs, caption{
+            background-color: var(--secondary) !important;
+            padding: 15px 40px;
+            font-size: 14px;
+        }
+
+        /*--------Module headers--------*/
+
+        .module h2{
+            background-color: var(--secondary);
+        }
+
+        /*--------Shadow under modules--------*/
+
+        .module table, #content-related, #changelist-filter,
+        .submit-row, #toolbar, fieldset.module{
+            background: #fff;
+            box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 30%);
+        }
+
+        .actions{
+            box-shadow: 0px 0px 10px 0px rgb(0 0 0 / 30%);
+        }
+
+        .results{
+            box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 0px 0px 10px 0px rgb(0 0 0 / 30%);
+        }
+
+        .paginator{
+            box-shadow: 0 -9px 0px 0px white, 0px 0px 10px 0px rgb(0 0 0 / 30%);
+        }
+
+        /*--------BUTTONS--------*/
+
+        .button, input[type=submit], input[type=button], .submit-row input, a.button {
+            background: var(--secondary);
+        }
+        
+        .button.default, input[type=submit].default, .submit-row input.default {
+            background: var(--primary);
+        }
+
+        .button:hover, input[type=submit]:hover, input[type=button]:hover {
+            background: var(--secondary-light);
+        }
+
+        .button.default:hover, input[type=submit].default:hover {
+            background: var(--primary-light);
+        }
+
+        .object-tools a:focus, .object-tools a:hover {
+            background-color: var(--primary-light);
+        }
+
+    </style>
+{% endblock %}
