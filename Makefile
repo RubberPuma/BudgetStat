@@ -34,4 +34,4 @@ isort:
 black:
 	docker-compose -f $(COMPOSE_FILE) run --rm backend black . --target-version py38 -l 110
 
-supercode: isort black flake mypy
+supercode: isort black flake

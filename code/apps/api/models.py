@@ -50,3 +50,7 @@ class Limit(models.Model):
 
     def __str__(self):
         return f"{self.category} {self.limit_value}"
+
+    @property
+    def available_funds(self):
+        return self.limit_value - self.current_spent

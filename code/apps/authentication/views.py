@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -17,7 +16,7 @@ def register_request(request):
             form = NewUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                user = form.cleaned_data.get("username")
+                form.cleaned_data.get("username")
 
                 return redirect("login")
 

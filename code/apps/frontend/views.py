@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views import generic
 
 from apps.api.models import Category, Expense, Limit
