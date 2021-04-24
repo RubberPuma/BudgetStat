@@ -16,8 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from apps.api import views
-
 urlpatterns = [
     path("api/", include("apps.api.urls")),
     path("auth/", include("apps.authentication.urls")),
