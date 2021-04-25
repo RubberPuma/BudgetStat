@@ -13,42 +13,8 @@ from apps.expenses.serializers import ExpenseSerializer
 client = Client()
 
 
-class GetAllExpensesTest(TestCase):
-    """ Test module for GET all expense """
-
-    def setUp(self):
-        category = Category.objects.create(category_name="Food")
-        john = User.objects.create_user("john", "lennon@thebeatles.com", "johnpassword")
-        tom = User.objects.create_user("tom", "tom@email.com", "tompassword")
-        Expense.objects.create(
-            description="",
-            amount=50.40,
-            category=category,
-            currency="EUR",
-            user=john,
-            date=datetime(2021, 4, 20),
-        )
-        Expense.objects.create(
-            description="",
-            amount=69.69,
-            category=category,
-            currency="EUR",
-            user=tom,
-            date=datetime(2137, 6, 9),
-        )
-
-    def test_get_all_expenses(self):
-        response = client.get(reverse("expense-list"))
-
-        expenses = Expense.objects.all()
-        serializer = ExpenseSerializer(expenses, many=True)
-
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
-class GetSingleExpensesTest(TestCase):
-    """ Test module for GET single expense """
+class ExpensesTest(TestCase):
+    """ Test module for expenses """
 
     def setUp(self):
         category = Category.objects.create(category_name="Food")
@@ -71,6 +37,19 @@ class GetSingleExpensesTest(TestCase):
             date=datetime(2137, 6, 9),
         )
 
+    # Test for GET all expenses
+
+    def test_get_all_expenses(self):
+        response = client.get(reverse("expense-list"))
+
+        expenses = Expense.objects.all()
+        serializer = ExpenseSerializer(expenses, many=True)
+
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    # Tests for GET single expense
+
     def test_get_valid_single_expense(self):
         response = client.get(reverse("expense-detail", kwargs={"pk": self.expense1.pk}))
 
@@ -83,3 +62,5 @@ class GetSingleExpensesTest(TestCase):
     def test_get_invalid_single_expense(self):
         response = client.get(reverse("expense-detail", kwargs={"pk": 20}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+  
