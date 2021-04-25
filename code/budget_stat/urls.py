@@ -15,10 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+
+from apps.authentication.views import UserViewSet
+from apps.categories.views import CategoryViewSet
+from apps.expenses.views import ExpenseViewSet
+from apps.limits.views import LimitViewSet
+
+router = routers.DefaultRouter()
+router.register(r"categories", CategoryViewSet)
+router.register(r"expenses", ExpenseViewSet)
+router.register(r"limits", LimitViewSet)
+router.register(r"users", UserViewSet)
 
 urlpatterns = [
-    path("api/", include("apps.api.urls")),
-    path("auth/", include("apps.authentication.urls")),
+    path("api/", include(router.urls)),
+    path("", include("apps.authentication.urls")),
     path("admin/", admin.site.urls),
     path("dashboard/", include("apps.frontend.urls")),
 ]

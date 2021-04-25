@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from django.forms import BaseInlineFormSet
 
-from apps.api.models import Expense, Limit
+from apps.expenses.models import Expense
+from apps.limits.models import Limit
 
 from .models import User
 
