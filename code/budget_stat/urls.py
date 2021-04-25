@@ -30,7 +30,7 @@ router.register(r"users", UserViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
-    path("", include("apps.authentication.urls")),
+    path("auth/", include("apps.authentication.urls")),
     path("admin/", admin.site.urls),
     path("dashboard/", include("apps.frontend.urls")),
 ]
