@@ -10,14 +10,18 @@ from apps.categories.serializers import CategorySerializer
 client = Client()
 
 
-class GetAllCategoriesTest(TestCase):
-    """ Test module for GET all categories """
+class CategoriesTest(TestCase):
+    """ Test module for categories """
 
     def setUp(self):
-        Category.objects.create(category_name="Food")
-        Category.objects.create(category_name="Recreation")
-        Category.objects.create(category_name="Bills")
-        Category.objects.create(category_name="Car")
+        self.food = Category.objects.create(category_name="Food")
+        self.recreation = Category.objects.create(category_name="Recreation")
+        self.bills = Category.objects.create(category_name="Bills")
+        self.car = Category.objects.create(category_name="Car")
+        self.valid_payload = {"category_name": "Food"}
+        self.invalid_payload = {"category_name": ""}
+
+    # Test for GET all categories
 
     def test_get_all_categories(self):
         response = client.get(reverse("category-list"))
@@ -28,15 +32,7 @@ class GetAllCategoriesTest(TestCase):
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-
-class GetSingleCategoryTest(TestCase):
-    """ Test module for GET single category """
-
-    def setUp(self):
-        self.food = Category.objects.create(category_name="Food")
-        self.recreation = Category.objects.create(category_name="Recreation")
-        self.bills = Category.objects.create(category_name="Bills")
-        self.car = Category.objects.create(category_name="Car")
+    # Tests for GET single category
 
     def test_get_valid_single_category(self):
         response = client.get(reverse("category-detail", kwargs={"pk": self.food.pk}))
@@ -51,17 +47,8 @@ class GetSingleCategoryTest(TestCase):
         response = client.get(reverse("category-detail", kwargs={"pk": 20}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-
-class CreateNewCategoryTest(TestCase):
-    """ Test module for inserting a new category """
-
-    def setUp(self):
-        self.valid_payload = {
-            "category_name": "Food",
-        }
-        self.invalid_payload = {
-            "category_name": "",
-        }
+    
+    # Tests for inserting a new category
 
     def test_create_valid_category(self):
         response = client.post(
@@ -75,15 +62,7 @@ class CreateNewCategoryTest(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-
-class UpdateSingleCategoryTest(TestCase):
-    """ Test module for updating an existing category """
-
-    def setUp(self):
-        self.food = Category.objects.create(category_name="Foot")
-        self.car = Category.objects.create(category_name="Car")
-        self.valid_payload = {"category_name": "Food"}
-        self.invalid_payload = {"category_name": ""}
+    # Tests for updating an existing category
 
     def test_valid_update_category(self):
         response = client.put(
@@ -101,13 +80,7 @@ class UpdateSingleCategoryTest(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-
-class DeleteSingleCategoryTest(TestCase):
-    """ Test module for deleting an existing category record """
-
-    def setUp(self):
-        self.food = Category.objects.create(category_name="Foot")
-        self.car = Category.objects.create(category_name="Car")
+    # Tests for deleting an existing category record
 
     def test_valid_delete_category(self):
         response = client.delete(reverse("category-detail", kwargs={"pk": self.food.pk}))
@@ -116,3 +89,6 @@ class DeleteSingleCategoryTest(TestCase):
     def test_invalid_delete_category(self):
         response = client.delete(reverse("category-detail", kwargs={"pk": 20}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+
+    
