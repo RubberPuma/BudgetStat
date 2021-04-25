@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from apps.authentication.models import User
+from apps.authentication.tests.factories import UserFactory
 from apps.categories.tests.factories import CategoryFactory
 from apps.expenses.models import Expense
 from apps.expenses.serializers import ExpenseSerializer
@@ -16,8 +16,8 @@ class ExpensesTest(APITestCase):
 
     def setUp(self):
         self.category = CategoryFactory()
-        self.john = User.objects.create_user("john", "lennon@thebeatles.com", "johnpassword")
-        self.tom = User.objects.create_user("tom", "tom@email.com", "tompassword")
+        self.john = UserFactory()
+        self.tom = UserFactory()
         self.expense1 = Expense.objects.create(
             description="",
             amount=50.40,

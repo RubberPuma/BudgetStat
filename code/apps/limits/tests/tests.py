@@ -1,24 +1,23 @@
 import json
 from datetime import datetime
 
-from rest_framework.test import APITestCase
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APITestCase
 
-from apps.authentication.models import User
-from apps.categories.models import Category
+from apps.authentication.tests.factories import UserFactory
+from apps.categories.tests.factories import CategoryFactory
 from apps.limits.models import Limit
 from apps.limits.serializers import LimitSerializer
 
-from apps.categories.tests.factories import CategoryFactory
 
 class LimitTest(APITestCase):
     """ Test module for limits """
 
     def setUp(self):
         self.category = CategoryFactory()
-        self.john = User.objects.create_user("john", "lennon@thebeatles.com", "johnpassword")
-        self.tom = User.objects.create_user("tom", "tom@email.com", "tompassword")
+        self.john = UserFactory()
+        self.tom = UserFactory()
         self.limit1 = Limit.objects.create(
             limit_value=100,
             current_spent=0,
@@ -42,14 +41,14 @@ class LimitTest(APITestCase):
             "category": self.category.pk,
             "start_date": "2021-04-25",
             "user": self.tom.pk,
-            }
+        }
         self.invalid_payload = {
             "limit_value": "",
-            }
+        }
 
     def test_get_all_limits(self):
         # Given
-        url = reverse("limit-list")  
+        url = reverse("limit-list")
         limits = Limit.objects.all()
         serializer = LimitSerializer(limits, many=True)
 
@@ -98,7 +97,9 @@ class LimitTest(APITestCase):
         url = reverse("limit-list")
 
         # When
-        response = self.client.post(url, data=json.dumps(self.invalid_payload), content_type="application/json")
+        response = self.client.post(
+            url, data=json.dumps(self.invalid_payload), content_type="application/json"
+        )
 
         # Then
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
