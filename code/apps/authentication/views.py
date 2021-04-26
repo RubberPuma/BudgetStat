@@ -76,13 +76,13 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     @action(detail=True)
     def expenses(self, request, pk):
         user = self.get_object()
-        expenses = Expense.objects.filter(user=user)
+        expenses = user.expense_set.all()
         serializer = ExpenseSerializer(expenses, many=True)
         return Response(serializer.data)
 
     @action(detail=True)
     def limits(self, request, pk):
         user = self.get_object()
-        limits = Limit.objects.filter(user=user)
+        limits = user.limit_set.all()
         serializer = LimitSerializer(limits, many=True)
         return Response(serializer.data)
