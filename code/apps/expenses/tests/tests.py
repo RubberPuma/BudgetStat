@@ -9,6 +9,7 @@ from apps.authentication.tests.factories import UserFactory
 from apps.categories.tests.factories import CategoryFactory
 from apps.expenses.models import Expense
 from apps.expenses.serializers import ExpenseSerializer
+from apps.expenses.tests.factories import ExpenseFactory
 
 
 class ExpensesTest(APITestCase):
@@ -16,30 +17,16 @@ class ExpensesTest(APITestCase):
 
     def setUp(self):
         self.category = CategoryFactory()
-        self.john = UserFactory()
-        self.tom = UserFactory()
-        self.expense1 = Expense.objects.create(
-            description="",
-            amount=50.40,
-            category=self.category,
-            currency="EUR",
-            user=self.john,
-            date=datetime(2021, 4, 20),
-        )
-        self.expense2 = Expense.objects.create(
-            description="",
-            amount=69.69,
-            category=self.category,
-            currency="EUR",
-            user=self.tom,
-            date=datetime(2137, 6, 9),
-        )
+        self.user1 = UserFactory()
+        self.user2 = UserFactory()
+        self.expense1 = ExpenseFactory(user=self.user1, category=self.category)
+        self.expense2 = ExpenseFactory(user=self.user2, category=self.category)
         self.valid_payload = {
             "description": "",
             "amount": 69.69,
             "category": self.category.pk,
             "currency": "EUR",
-            "user": self.tom.pk,
+            "user": self.user1.pk,
             "date": "2021-04-25",
         }
         self.invalid_payload = {

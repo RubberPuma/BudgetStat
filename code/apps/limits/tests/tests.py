@@ -9,6 +9,7 @@ from apps.authentication.tests.factories import UserFactory
 from apps.categories.tests.factories import CategoryFactory
 from apps.limits.models import Limit
 from apps.limits.serializers import LimitSerializer
+from apps.limits.tests.factories import LimitFactory
 
 
 class LimitTest(APITestCase):
@@ -16,31 +17,17 @@ class LimitTest(APITestCase):
 
     def setUp(self):
         self.category = CategoryFactory()
-        self.john = UserFactory()
-        self.tom = UserFactory()
-        self.limit1 = Limit.objects.create(
-            limit_value=100,
-            current_spent=0,
-            period="Y",
-            category=self.category,
-            start_date=datetime(2021, 4, 20),
-            user=self.john,
-        )
-        self.limit2 = Limit.objects.create(
-            limit_value=500,
-            current_spent=0,
-            period="M",
-            category=self.category,
-            start_date=datetime(2021, 4, 20),
-            user=self.tom,
-        )
+        self.user1 = UserFactory()
+        self.user2 = UserFactory()
+        self.limit1 = LimitFactory(user=self.user1, category=self.category)
+        self.limit2 = LimitFactory(user=self.user2, category=self.category)
         self.valid_payload = {
             "limit_value": "100",
             "current_spent": "0",
             "period": "M",
             "category": self.category.pk,
             "start_date": "2021-04-25",
-            "user": self.tom.pk,
+            "user": self.user1.pk,
         }
         self.invalid_payload = {
             "limit_value": "",
