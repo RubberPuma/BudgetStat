@@ -7,9 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from apps.authentication.models import User
-from apps.expenses.models import Expense
 from apps.expenses.serializers import ExpenseSerializer
-from apps.limits.models import Limit
 from apps.limits.serializers import LimitSerializer
 
 from .forms import NewUserForm

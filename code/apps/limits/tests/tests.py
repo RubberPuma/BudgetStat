@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 
 from django.urls import reverse
 from rest_framework import status
@@ -25,7 +24,7 @@ class LimitTest(APITestCase):
             "limit_value": "100",
             "current_spent": "0",
             "period": "M",
-            "category": self.category.pk,
+            "category": self.category.category_name,
             "start_date": "2021-04-25",
             "user": self.user1.pk,
         }

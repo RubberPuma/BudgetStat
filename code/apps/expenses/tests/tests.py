@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 
 from django.urls import reverse
 from rest_framework import status
@@ -24,7 +23,7 @@ class ExpensesTest(APITestCase):
         self.valid_payload = {
             "description": "",
             "amount": 69.69,
-            "category": self.category.pk,
+            "category": self.category.category_name,
             "currency": "EUR",
             "user": self.user1.pk,
             "date": "2021-04-25",

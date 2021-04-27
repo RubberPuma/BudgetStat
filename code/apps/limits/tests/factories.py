@@ -2,10 +2,10 @@ from datetime import datetime
 
 from factory import SubFactory
 from factory.django import DjangoModelFactory
-from factory.fuzzy import FuzzyChoice, FuzzyDecimal, FuzzyDate
+from factory.fuzzy import FuzzyChoice, FuzzyDate, FuzzyDecimal
 
-from apps.categories.tests.factories import CategoryFactory
 from apps.authentication.tests.factories import UserFactory
+from apps.categories.tests.factories import CategoryFactory
 
 from ..models import Limit
 
