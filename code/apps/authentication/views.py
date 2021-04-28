@@ -7,6 +7,9 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from apps.authentication.models import User
+from apps.categories.consts import CATEGORIES
+from apps.categories.models import Category
+from apps.categories.serializers import CategorySerializer
 from apps.expenses.serializers import ExpenseSerializer
 from apps.limits.serializers import LimitSerializer
 
@@ -24,6 +27,13 @@ def register_request(request):
             form = NewUserForm(request.POST)
             if form.is_valid():
                 form.save()
+                username = form.cleaned_data.get("username")
+                raw_password = form.cleaned_data.get("password1")
+                user = authenticate(username=username, password=raw_password)
+
+                for name in CATEGORIES:
+                    category = Category(category_name=name, user=user)
+                    category.save()
 
                 return redirect("login")
 
@@ -82,4 +92,11 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
         user = self.get_object()
         limits = user.limit_set.all()
         serializer = LimitSerializer(limits, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True)
+    def categories(self, request, pk):
+        user = self.get_object()
+        categories = user.category_set.all()
+        serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)

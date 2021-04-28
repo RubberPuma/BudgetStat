@@ -4,6 +4,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from apps.authentication.tests.factories import UserFactory
 from apps.categories.models import Category
 from apps.categories.serializers import CategorySerializer
 from apps.categories.tests.factories import CategoryFactory
@@ -13,11 +14,15 @@ class CategoriesTest(APITestCase):
     """ Test module for categories """
 
     def setUp(self):
-        self.food = CategoryFactory()
-        self.recreation = CategoryFactory()
-        self.bills = CategoryFactory()
-        self.car = CategoryFactory()
-        self.valid_payload = {"category_name": "Food"}
+        self.user = UserFactory()
+        self.food = CategoryFactory(user=self.user)
+        self.recreation = CategoryFactory(user=self.user)
+        self.bills = CategoryFactory(user=self.user)
+        self.car = CategoryFactory(user=self.user)
+        self.valid_payload = {
+            "category_name": "Name",
+            "user": self.user.pk,
+        }
         self.invalid_payload = {"category_name": ""}
 
     def test_get_all_categories(self):

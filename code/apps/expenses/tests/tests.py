@@ -15,16 +15,15 @@ class ExpensesTest(APITestCase):
     """ Test module for expenses """
 
     def setUp(self):
-        self.category = CategoryFactory()
         self.user1 = UserFactory()
         self.user2 = UserFactory()
+        self.category = CategoryFactory(user=self.user1)
         self.expense1 = ExpenseFactory(user=self.user1, category=self.category)
         self.expense2 = ExpenseFactory(user=self.user2, category=self.category)
         self.valid_payload = {
             "description": "",
             "amount": 69.69,
-            "category": self.category.category_name,
-            "currency": "EUR",
+            "category": self.category.pk,
             "user": self.user1.pk,
             "date": "2021-04-25",
         }

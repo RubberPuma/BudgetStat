@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from apps.categories.serializers import CategoryRelatedField
-
 from .models import Limit
+
+# from apps.categories.serializers import CategoryRelatedField
 
 
 class LimitSerializer(serializers.ModelSerializer):
-    category = CategoryRelatedField(many=False)
+    # category = CategoryRelatedField(many=False)
 
     class Meta:
         model = Limit

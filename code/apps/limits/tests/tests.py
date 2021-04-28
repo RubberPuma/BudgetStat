@@ -15,16 +15,16 @@ class LimitTest(APITestCase):
     """ Test module for limits """
 
     def setUp(self):
-        self.category = CategoryFactory()
         self.user1 = UserFactory()
         self.user2 = UserFactory()
+        self.category = CategoryFactory(user=self.user1)
         self.limit1 = LimitFactory(user=self.user1, category=self.category)
         self.limit2 = LimitFactory(user=self.user2, category=self.category)
         self.valid_payload = {
             "limit_value": "100",
             "current_spent": "0",
             "period": "M",
-            "category": self.category.category_name,
+            "category": self.category.pk,
             "start_date": "2021-04-25",
             "user": self.user1.pk,
         }
