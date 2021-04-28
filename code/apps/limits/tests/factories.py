@@ -7,9 +7,9 @@ from factory.fuzzy import FuzzyChoice, FuzzyDate, FuzzyDecimal
 from apps.authentication.tests.factories import UserFactory
 from apps.categories.tests.factories import CategoryFactory
 
+from ..consts import PERIODS
 from ..models import Limit
 
-from ..consts import PERIODS
 
 class LimitFactory(DjangoModelFactory):
     limit_value = FuzzyDecimal(500, 1000)

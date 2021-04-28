@@ -5,6 +5,7 @@ from apps.categories.models import Category
 
 from .consts import CURRENCY_TYPE
 
+
 class Expense(models.Model):
     description = models.CharField(max_length=200, blank=True, default="")
     amount = models.DecimalField(max_digits=15, decimal_places=2)

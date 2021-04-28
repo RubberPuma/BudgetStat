@@ -5,10 +5,10 @@ from rest_framework.test import APITestCase
 from apps.authentication.models import User
 from apps.authentication.serializers import UserSerializer
 from apps.authentication.tests.factories import UserFactory
-from apps.expenses.tests.factories import ExpenseFactory
 from apps.expenses.serializers import ExpenseSerializer
-from apps.limits.tests.factories import LimitFactory
+from apps.expenses.tests.factories import ExpenseFactory
 from apps.limits.serializers import LimitSerializer
+from apps.limits.tests.factories import LimitFactory
 
 
 class UsersTest(APITestCase):

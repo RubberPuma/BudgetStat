@@ -5,6 +5,7 @@ from apps.categories.models import Category
 
 from .consts import PERIODS
 
+
 class Limit(models.Model):
     limit_value = models.DecimalField(max_digits=15, decimal_places=2)
     current_spent = models.DecimalField(max_digits=15, decimal_places=2, default=0)

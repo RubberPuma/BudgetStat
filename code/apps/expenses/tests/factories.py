@@ -7,9 +7,8 @@ from factory.fuzzy import FuzzyChoice, FuzzyDate, FuzzyDecimal, FuzzyText
 from apps.authentication.tests.factories import UserFactory
 from apps.categories.tests.factories import CategoryFactory
 
-from ..models import Expense
-
 from ..consts import CURRENCY_TYPE
+from ..models import Expense
 
 
 class ExpenseFactory(DjangoModelFactory):
