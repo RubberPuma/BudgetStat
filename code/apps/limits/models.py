@@ -3,14 +3,9 @@ from django.db import models
 from apps.authentication.models import User
 from apps.categories.models import Category
 
+from .consts import PERIODS
 
 class Limit(models.Model):
-    PERIODS = [
-        ("D", "Daily"),
-        ("W", "Weekly"),
-        ("M", "Monthly"),
-        ("Y", "Yearly"),
-    ]
     limit_value = models.DecimalField(max_digits=15, decimal_places=2)
     current_spent = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     period = models.CharField(max_length=1, choices=PERIODS, default="W")

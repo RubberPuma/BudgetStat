@@ -9,11 +9,12 @@ from apps.categories.tests.factories import CategoryFactory
 
 from ..models import Limit
 
+from ..consts import PERIODS
 
 class LimitFactory(DjangoModelFactory):
     limit_value = FuzzyDecimal(500, 1000)
     current_spent = FuzzyDecimal(500)
-    period = FuzzyChoice(["D", "W", "M", "Y"])
+    period = FuzzyChoice([x[0] for x in PERIODS])
     category = SubFactory(CategoryFactory)
     start_date = FuzzyDate(
         datetime(2018, 1, 1),

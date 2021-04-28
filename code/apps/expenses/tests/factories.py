@@ -9,12 +9,14 @@ from apps.categories.tests.factories import CategoryFactory
 
 from ..models import Expense
 
+from ..consts import CURRENCY_TYPE
+
 
 class ExpenseFactory(DjangoModelFactory):
     description = FuzzyChoice(["", FuzzyText(length=10)])
     amount = FuzzyDecimal(10, 1000)
     category = SubFactory(CategoryFactory)
-    currency = FuzzyChoice(["PLN", "EUR", "GBP", "USD", "JPY", "CHF", "CAD"])
+    currency = FuzzyChoice([x[0] for x in CURRENCY_TYPE])
     user = SubFactory(UserFactory)
     date = FuzzyDate(
         datetime(2018, 1, 1),
