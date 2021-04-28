@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
 
-from apps.api.models import Category, Expense, Limit
+from apps.categories.models import Category
+from apps.expenses.models import Expense
+from apps.limits.models import Limit
 
 
 # display statistics suppage
