@@ -24,7 +24,6 @@ def register_request(request):
             form = NewUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                form.cleaned_data.get("username")
 
                 return redirect("login")
 
